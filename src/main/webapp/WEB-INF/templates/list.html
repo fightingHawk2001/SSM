@@ -1,0 +1,85 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: fightingHawk
+  Date: 2022/9/9
+  Time: 17:20
+-->
+
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>员工信息管理系统</title>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/list.css}">
+    <link rel="stylesheet" th:href="@{/static/css/common.css}">
+
+    <!-- 用于本地样式预览
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/css/list.css">
+    <link rel="stylesheet" href="../../static/css/common.css">
+    -->
+
+    <script th:src="@{/static/js/list.js}"></script>
+</head>
+<body>
+<div id="wrapper">
+    <h1>员工信息管理系统</h1>
+    <div class="float-end">
+        <a th:href="@{/to/add}" class="btn btn-primary mb-2">添加员工信息</a>
+    </div>
+    <table class="table table-striped table-hover table-bordered">
+        <tr>
+            <th>序号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>地址</th>
+            <th>邮箱</th>
+            <th>操作</th>
+        </tr>
+        <tr th:each="emp, status : ${page.list}">
+            <th th:text="${status.count}">1</th>
+            <td th:text="${emp.empName}">Mark</td>
+            <td th:text="${emp.gender}">男</td>
+            <td th:text="${emp.age}">29</td>
+            <td th:text="${emp.address}">大理寺</td>
+            <td th:text="${emp.email}">Mark@dalisi.com</td>
+            <td>
+                <div class="row">
+                    <div class="col">
+                        <a th:href="@{|/emp/${emp.empId}|}" class="btn btn-primary">修改</a>
+                    </div>
+                    <div class="col">
+                        <!-- 使用表单来更改提交方式为delete，并使用js函数来进一步控制 -->
+                        <form th:action="@{|/emp/delete/${emp.empId}|}" method="post" onsubmit="return deleteEmpById()">
+                            <input type="hidden" name="_method" value="delete">
+                            <input type="submit" class="btn btn-primary" value="删除">
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class="pagination justify-content-center">
+        <span th:if="${page.isFirstPage}" class="page-link disabled">首页</span>
+        <a th:unless="${page.isFirstPage}" class="page-link" th:href="@{/emp/page/1}">首页</a>
+        <span th:if="${page.isFirstPage}" class="page-link disabled">&lt;&lt;</span>
+        <a th:unless="${page.isFirstPage}" class="page-link" th:href="@{|/emp/page/${page.prePage}|}">&lt;&lt;</a>
+
+        <span th:each="num : ${page.navigatepageNums}">
+            <span th:if="${num == page.pageNum}" class="page-link active" th:text="${num}"></span>
+            <a th:unless="${num == page.pageNum}" th:href="@{|/emp/page/${num}|}" class="page-link" th:text="${num}"></a>
+        </span>
+
+        <span th:if="${page.isLastPage}" class="page-link disabled">&gt;&gt;</span>
+        <a th:unless="${page.isLastPage}" class="page-link" th:href="@{|/emp/page/${page.nextPage}|}">&gt;&gt;</a>
+        <span th:if="${page.isLastPage}" class="page-link disabled">尾页</span>
+        <a th:unless="${page.isLastPage}" class="page-link" th:href="@{|/emp/page/${page.pages}|}">尾页</a>
+    </div>
+    <div class="text-center">
+        <span>共有[[${page.total}]]条数据，[[${page.pages}]]页</span>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+/*
+  Created by IntelliJ IDEA.
+  User: fightingHawk
+  Date: 2022/9/10
+  Time: 14:45
+*/
+
+#wrapper {
+    width: fit-content;
+    margin: 100px auto;
+    min-width: 400px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}

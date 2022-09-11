@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!-- 配置全局设置 -->
+    <settings>
+        <!-- 设置自动将下划线字段名映射为小驼峰属性名 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- 开启延迟加载 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 是否完整加载 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+    <!-- 配置类型别名 -->
+    <typeAliases>
+        <!-- 设置指定包下所有类为默认别名，即不区分大小写的类名 -->
+        <package name="com.fightinghawk.ssm.pojo"/>
+    </typeAliases>
+    <!-- 配置插件 -->
+    <plugins>
+        <!--设置分页插件-->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+    </plugins>
+</configuration>

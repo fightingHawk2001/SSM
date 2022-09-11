@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 对应接口全类名 -->
+<mapper namespace="com.fightinghawk.ssm.mapper.EmpMapper">
+    <!-- Emp selectEmpByEmpId(@Param("empId") Integer empId); -->
+    <select id="selectEmpByEmpId" resultType="emp">
+        select * from emp where emp_id = #{empId}
+    </select>
+
+    <!-- List<Emp> selectAllEmp(); -->
+    <select id="selectAllEmp" resultType="com.fightinghawk.ssm.pojo.Emp">
+        select * from emp
+    </select>
+
+    <!-- void insertEmp(Emp emp); -->
+    <insert id="insertEmp">
+        insert into emp values (null, #{empName}, #{gender}, #{age}, #{address}, #{email})
+    </insert>
+
+    <!-- void updateEmpById(Emp emp); -->
+    <update id="updateEmpById">
+        update emp
+        set emp_name = #{empName}, gender = #{gender}, age = #{age}, address = #{address}, email = #{email}
+        where emp_id = #{empId}
+    </update>
+
+    <!--  void deleteEmpById(@Param("empId") Integer empId);-->
+    <delete id="deleteEmpById">
+        delete from emp where emp_id = #{empId}
+    </delete>
+
+
+</mapper>

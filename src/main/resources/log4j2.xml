@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 日志级别以及优先级排序：OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+<!-- Configuration后面的status用于设计log4j2自身内部的信息输出，可以不设置，当设置成TRACE时，可以看到log4j2内部各种详细输出 -->
+<Configuration status="ERROR">
+    <Appenders>
+        <!-- 输出到控制台 -->
+        <Console name="console">
+            <!-- 设置日志打印格式 -->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p %logger{36} - %m%n"/>
+        </Console>
+        <!-- 输出到文件 -->
+        <!--
+        <File name="file" fileName="log4j2.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p %logger{36} - %m%n"/>
+        </File>
+        -->
+    </Appenders>
+
+    <Loggers>
+        <!-- 设置mapper接口所在包 -->
+        <Logger name="com.fightinghawk.ssm.mapper" level="DEBUG" additivity="false">
+            <!-- 引用日志打印的位置 -->
+            <AppenderRef ref="console"/>
+            <!--<AppenderRef ref="file"/>-->
+        </Logger>
+
+        <Root level="error">
+            <AppenderRef ref="console"/>
+            <!--<AppenderRef ref="file"/>-->
+        </Root>
+    </Loggers>
+</Configuration>
